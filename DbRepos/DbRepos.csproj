@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\DbContext\DbContext.csproj" />
+    <!--<ProjectReference Include="..\DbRepos\DbRepos.csproj" />
+    <ProjectReference Include="..\DbModels\DbModels.csproj" /> -->
+
+  </ItemGroup>
+</Project>
