@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(csMainDbContext.SqlServerDbContext))]
-    [Migration("20240916113454_miInitial")]
+    [Migration("20240917063923_miInitial")]
     partial class miInitial
     {
         /// <inheritdoc />
@@ -24,6 +24,23 @@ namespace DbContext.Migrations.SqlServerDbContext
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DbModels.csAnimalDbM", b =>
+                {
+                    b.Property<Guid>("AnimalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AnimalId");
+
+                    b.ToTable("Animals");
+                });
 
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
@@ -37,7 +54,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<bool>("Seeded")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("UserDbMUserId")
+                    b.Property<Guid?>("UserDbMUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ReviewId");
@@ -68,9 +85,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     b.HasOne("DbModels.csUserDbM", "UserDbM")
                         .WithMany("ReviewsDbM")
-                        .HasForeignKey("UserDbMUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserDbMUserId");
 
                     b.Navigation("UserDbM");
                 });

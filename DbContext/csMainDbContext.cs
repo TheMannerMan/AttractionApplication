@@ -24,6 +24,8 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
 
     public DbSet<csReviewDbM> Reviews { get; set; }
 
+    public DbSet<csAnimalDbM> Animals { get; set; }
+
     #endregion
 
 

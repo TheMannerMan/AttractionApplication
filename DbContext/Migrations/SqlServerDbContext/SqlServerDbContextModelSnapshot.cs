@@ -22,6 +22,23 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DbModels.csAnimalDbM", b =>
+                {
+                    b.Property<Guid>("AnimalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AnimalId");
+
+                    b.ToTable("Animals");
+                });
+
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
                     b.Property<Guid>("ReviewId")
@@ -34,7 +51,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<bool>("Seeded")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("UserDbMUserId")
+                    b.Property<Guid?>("UserDbMUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ReviewId");
@@ -65,9 +82,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     b.HasOne("DbModels.csUserDbM", "UserDbM")
                         .WithMany("ReviewsDbM")
-                        .HasForeignKey("UserDbMUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserDbMUserId");
 
                     b.Navigation("UserDbM");
                 });

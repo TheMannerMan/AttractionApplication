@@ -1561,7 +1561,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Configuration": "1.0.0"
+          "Configuration": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "8.0.8"
         },
         "compile": {
           "bin/placeholder/Models.dll": {}
@@ -4019,11 +4020,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\DbRepos.csproj",
+      "projectUniqueName": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\DbRepos.csproj",
       "projectName": "DbRepos",
-      "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\DbRepos.csproj",
+      "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\DbRepos.csproj",
       "packagesPath": "C:\\Users\\henri\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\obj\\",
+      "outputPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbRepos\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\henri\\AppData\\Roaming\\NuGet\\NuGet.Config"

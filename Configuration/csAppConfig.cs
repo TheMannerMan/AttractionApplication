@@ -1,12 +1,11 @@
-﻿using System.Text.Json;
+﻿#define UseAzureKV
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 
-
 namespace Configuration;
 
-//TODO: add member and create user-secret-file
-public class csAppConfig
+public sealed class csAppConfig
 {
     static public string Heartbeat { get; } = $"Heartbeat from namespace {nameof(Configuration)}, class {nameof(csAppConfig)}";
 
@@ -209,3 +208,4 @@ public class JwtConfig
     public bool ValidateLifetime { get; set; } = true;
 }
 #endregion
+

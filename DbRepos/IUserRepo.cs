@@ -11,7 +11,7 @@ namespace DbRepos
 {
     public interface IUserRepo
     {
-        public List<IUser> ReadUsersAsync(int _count);
+        public List<csUserDbM> ReadUsersAsync(int _count);
 
         public void Seed(int _count);
     }

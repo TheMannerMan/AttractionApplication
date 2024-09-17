@@ -11,7 +11,7 @@ namespace Services
     public class csUserService1 : IUserService
     {
         private IUserRepo _repo = null;
-        public List<IUser> ReadUsersAsync(int count) => _repo.ReadUsersAsync(count);
+        public List<IUser> ReadUsersAsync(int count) => _repo.ReadUsersAsync(count).ToList<IUser>();
 
         public void Seed(int count) => _repo.Seed(count);
 

@@ -20,7 +20,7 @@ namespace AttractionApplication.Controllers
         [ActionName("Users")]
         [ProducesResponseType(200, Type = typeof(List<IUser>))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> Attractions(string count = "5")
+        public async Task<IActionResult> Read(string count = "5")
         {
             //_logger.LogInformation("Endpoint Attractions executed");
            try
@@ -50,7 +50,7 @@ namespace AttractionApplication.Controllers
                 // _logger.LogInformation("Endpoint Seed executed");
                 int _count = int.Parse(count);
 
-                var users = _uService.ReadUsersAsync(_count);
+                _uService.Seed(_count);
 
                 return Ok("Seeded");
             }

@@ -12,6 +12,19 @@ namespace DbContext.Migrations.SqlServerDbContext
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Animals",
+                columns: table => new
+                {
+                    AnimalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Seeded = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animals", x => x.AnimalId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -29,7 +42,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     ReviewId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserDbMUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserDbMUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -40,8 +53,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                         name: "FK_Reviews_Users_UserDbMUserId",
                         column: x => x.UserDbMUserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -53,6 +65,9 @@ namespace DbContext.Migrations.SqlServerDbContext
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Animals");
+
             migrationBuilder.DropTable(
                 name: "Reviews");
 

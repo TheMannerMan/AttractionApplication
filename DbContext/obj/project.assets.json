@@ -2035,7 +2035,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Configuration": "1.0.0"
+          "Configuration": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "8.0.8"
         },
         "compile": {
           "bin/placeholder/Models.dll": {}

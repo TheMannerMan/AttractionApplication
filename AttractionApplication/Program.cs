@@ -27,6 +27,8 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddSingleton<IAnimalsService,csAnimalsService2>();
 builder.Services.AddScoped<IUserService,csUserService1>();
 builder.Services.AddScoped<IUserRepo, csUserRepo>();
+builder.Services.AddScoped<IAnimalRepo, csAnimalRepo>();
+builder.Services.AddScoped<IAnimalService, csAnimalServiceDb>();
 #endregion
 
 var app = builder.Build();
