@@ -12,6 +12,8 @@ namespace Models
         public string AttractionName { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
+
+        public ILocation Location { get; set; }
         public List<IReview> Reviews { get; set; }
 
         // TODO: Add when Location is implemented.

@@ -30,13 +30,31 @@ namespace DbRepos
 
                 var users = _seeder.ItemsToList<csUserDbM>(50);
                 var attractions = _seeder.ItemsToList<csAttractionDbM>(1000);
-                
+
                 //a list to hold all reviews
                 var allReviews = new List<csReviewDbM>();
+                var locations = new List<csLocationDbM>();
+
 
                 // For each attraction, generate between 0 and 20 reviews
                 foreach (var attraction in attractions)
                 {
+                    var newLocation = new csLocationDbM().Seed(_seeder);
+
+                    // Check if the location already exists in the in-memory list or in the database
+                    var existingLocation = locations.FirstOrDefault(l => l.City == newLocation.City && l.Country == newLocation.Country)
+                    ?? db.Locations.FirstOrDefault(l => l.City == newLocation.City && l.Country == newLocation.Country);
+
+                    if (existingLocation == null)
+                    {
+                        locations.Add(newLocation);
+                        attraction.LocationDbM = newLocation;
+                    }
+                    else
+                    {
+                        attraction.LocationDbM = existingLocation;
+                    }
+
                     int nrOfReviews = _seeder.Next(0, 21); // Randomizes a number between 0 and 20.
                     if (nrOfReviews > 0)
                     {
@@ -52,6 +70,12 @@ namespace DbRepos
                     }
                 }
 
+                foreach (var loc in locations)
+                {
+                    System.Console.WriteLine($"{loc.City} {loc.Country} ID: {loc.LocationId}");
+                }
+
+                db.Locations.AddRange(locations);
                 db.Users.AddRange(users);
                 db.Attractions.AddRange(attractions);
                 db.Reviews.AddRange(allReviews);

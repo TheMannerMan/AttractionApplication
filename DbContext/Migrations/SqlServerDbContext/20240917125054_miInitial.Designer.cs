@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(csMainDbContext.SqlServerDbContext))]
-    [Migration("20240917111831_miInitial")]
+    [Migration("20240917125054_miInitial")]
     partial class miInitial
     {
         /// <inheritdoc />
@@ -57,12 +57,41 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<Guid?>("LocationDbMLocationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("Seeded")
                         .HasColumnType("bit");
 
                     b.HasKey("AttractionId");
 
+                    b.HasIndex("LocationDbMLocationId");
+
                     b.ToTable("Attractions");
+                });
+
+            modelBuilder.Entity("DbModels.csLocationDbM", b =>
+                {
+                    b.Property<Guid>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("LocationId");
+
+                    b.HasIndex("City", "Country")
+                        .IsUnique()
+                        .HasFilter("[City] IS NOT NULL AND [Country] IS NOT NULL");
+
+                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
@@ -109,10 +138,19 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DbModels.csAttractionDbM", b =>
+                {
+                    b.HasOne("DbModels.csLocationDbM", "LocationDbM")
+                        .WithMany("AttractionDbMs")
+                        .HasForeignKey("LocationDbMLocationId");
+
+                    b.Navigation("LocationDbM");
+                });
+
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
                     b.HasOne("DbModels.csAttractionDbM", "AttractionDbM")
-                        .WithMany("ReviewDbMs")
+                        .WithMany("ReviewsDbM")
                         .HasForeignKey("AttractionDbMAttractionId");
 
                     b.HasOne("DbModels.csUserDbM", "UserDbM")
@@ -126,7 +164,12 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             modelBuilder.Entity("DbModels.csAttractionDbM", b =>
                 {
-                    b.Navigation("ReviewDbMs");
+                    b.Navigation("ReviewsDbM");
+                });
+
+            modelBuilder.Entity("DbModels.csLocationDbM", b =>
+                {
+                    b.Navigation("AttractionDbMs");
                 });
 
             modelBuilder.Entity("DbModels.csUserDbM", b =>

@@ -25,18 +25,17 @@ namespace DbContext.Migrations.SqlServerDbContext
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attractions",
+                name: "Locations",
                 columns: table => new
                 {
-                    AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Category = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attractions", x => x.AttractionId);
+                    table.PrimaryKey("PK_Locations", x => x.LocationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +49,27 @@ namespace DbContext.Migrations.SqlServerDbContext
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attractions",
+                columns: table => new
+                {
+                    AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LocationDbMLocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Seeded = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attractions", x => x.AttractionId);
+                    table.ForeignKey(
+                        name: "FK_Attractions_Locations_LocationDbMLocationId",
+                        column: x => x.LocationDbMLocationId,
+                        principalTable: "Locations",
+                        principalColumn: "LocationId");
                 });
 
             migrationBuilder.CreateTable(
@@ -78,6 +98,18 @@ namespace DbContext.Migrations.SqlServerDbContext
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Attractions_LocationDbMLocationId",
+                table: "Attractions",
+                column: "LocationDbMLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locations_City_Country",
+                table: "Locations",
+                columns: new[] { "City", "Country" },
+                unique: true,
+                filter: "[City] IS NOT NULL AND [Country] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_AttractionDbMAttractionId",
                 table: "Reviews",
                 column: "AttractionDbMAttractionId");
@@ -102,6 +134,9 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
         }
     }
 }

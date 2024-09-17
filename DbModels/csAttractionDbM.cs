@@ -14,13 +14,19 @@ namespace DbModels
     public class csAttractionDbM : csAttraction, ISeed<csAttractionDbM>
     {
         [Key]
-        public override Guid AttractionId { get;  set; } = Guid.NewGuid();
+        public override Guid AttractionId { get; set; } = Guid.NewGuid();
 
         [NotMapped]
-        public override List<IReview> Reviews { get => ReviewDbMs?.ToList<IReview>(); set => throw new NotImplementedException(); }
+        public override List<IReview> Reviews { get => ReviewsDbM?.ToList<IReview>(); set => new NotImplementedException(); }
+
+        [NotMapped]
+        public override ILocation Location { get => LocationDbM; set => new NotImplementedException(); }
 
         [JsonIgnore]
-        public virtual List<csReviewDbM> ReviewDbMs { get; set; } = null;
+        public virtual List<csReviewDbM> ReviewsDbM { get; set; } = null;
+
+        [JsonIgnore]
+        public virtual csLocationDbM LocationDbM { get; set; } = null;
 
         csAttractionDbM ISeed<csAttractionDbM>.Seed(csSeedGenerator _seeder)
         {

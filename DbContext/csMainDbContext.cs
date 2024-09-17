@@ -23,13 +23,15 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<csUserDbM> Users { get; set; }
     public DbSet<csReviewDbM> Reviews { get; set; }
     public DbSet<csAttractionDbM> Attractions { get; set; }
+
+    public DbSet<csLocationDbM> Locations { get; set; }
     public DbSet<csAnimalDbM> Animals { get; set; }
 
     #endregion
 
 
     #region get right context from DbSet configuration in json file and UserLogin
-    public static DbContextOptionsBuilder<csMainDbContext> DbContextOptions (DbLoginDetail loginDetail)
+    public static DbContextOptionsBuilder<csMainDbContext> DbContextOptions(DbLoginDetail loginDetail)
     {
         var _optionsBuilder = new DbContextOptionsBuilder<csMainDbContext>();
 
@@ -82,8 +84,14 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
         #endregion
 
         #region override modelbuilder
+
+        // Define unique index for City and Country in csLocationDbM
+        modelBuilder.Entity<csLocationDbM>()
+            .HasIndex(l => new { l.City, l.Country })
+            .IsUnique();
+
         #endregion
-        
+
         base.OnModelCreating(modelBuilder);
     }
 
@@ -104,7 +112,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
                     i => i.DbServer == "SQLServer" && i.DbUserLogin == "sysadmin").DbConnectionString;
                 optionsBuilder.UseSqlServer(connectionString,
                     options => options.EnableRetryOnFailure());
-                    
+
             }
             base.OnConfiguring(optionsBuilder);
         }
