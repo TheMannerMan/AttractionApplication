@@ -25,6 +25,21 @@ namespace DbContext.Migrations.SqlServerDbContext
                 });
 
             migrationBuilder.CreateTable(
+                name: "Attractions",
+                columns: table => new
+                {
+                    AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Seeded = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attractions", x => x.AttractionId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -43,6 +58,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     ReviewId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserDbMUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AttractionDbMAttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -50,11 +66,21 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     table.PrimaryKey("PK_Reviews", x => x.ReviewId);
                     table.ForeignKey(
+                        name: "FK_Reviews_Attractions_AttractionDbMAttractionId",
+                        column: x => x.AttractionDbMAttractionId,
+                        principalTable: "Attractions",
+                        principalColumn: "AttractionId");
+                    table.ForeignKey(
                         name: "FK_Reviews_Users_UserDbMUserId",
                         column: x => x.UserDbMUserId,
                         principalTable: "Users",
                         principalColumn: "UserId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_AttractionDbMAttractionId",
+                table: "Reviews",
+                column: "AttractionDbMAttractionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserDbMUserId",
@@ -70,6 +96,9 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "Attractions");
 
             migrationBuilder.DropTable(
                 name: "Users");

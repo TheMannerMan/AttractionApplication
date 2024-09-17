@@ -13,6 +13,6 @@ namespace DbRepos
     {
         public List<csUserDbM> ReadUsersAsync(int _count);
 
-        public void Seed(int _count);
+        public void Seed();
     }
 }

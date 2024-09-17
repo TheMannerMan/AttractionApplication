@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(csMainDbContext.SqlServerDbContext))]
-    [Migration("20240917063923_miInitial")]
+    [Migration("20240917094836_miInitial")]
     partial class miInitial
     {
         /// <inheritdoc />
@@ -42,10 +42,36 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.ToTable("Animals");
                 });
 
+            modelBuilder.Entity("DbModels.csAttractionDbM", b =>
+                {
+                    b.Property<Guid>("AttractionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AttractionName")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("Seeded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AttractionId");
+
+                    b.ToTable("Attractions");
+                });
+
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
                     b.Property<Guid>("ReviewId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AttractionDbMAttractionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
@@ -58,6 +84,8 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ReviewId");
+
+                    b.HasIndex("AttractionDbMAttractionId");
 
                     b.HasIndex("UserDbMUserId");
 
@@ -83,11 +111,22 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
+                    b.HasOne("DbModels.csAttractionDbM", "AttractionDbM")
+                        .WithMany("ReviewDbMs")
+                        .HasForeignKey("AttractionDbMAttractionId");
+
                     b.HasOne("DbModels.csUserDbM", "UserDbM")
                         .WithMany("ReviewsDbM")
                         .HasForeignKey("UserDbMUserId");
 
+                    b.Navigation("AttractionDbM");
+
                     b.Navigation("UserDbM");
+                });
+
+            modelBuilder.Entity("DbModels.csAttractionDbM", b =>
+                {
+                    b.Navigation("ReviewDbMs");
                 });
 
             modelBuilder.Entity("DbModels.csUserDbM", b =>

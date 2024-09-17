@@ -10,6 +10,6 @@ namespace Services
     {
         public List<IUser> ReadUsersAsync(int count);
 
-        public void Seed(int count);
+        public void Seed();
     }
 }

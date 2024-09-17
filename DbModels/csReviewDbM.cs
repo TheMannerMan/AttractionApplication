@@ -16,12 +16,17 @@ namespace DbModels
         [NotMapped]
         public override IUser User { get => UserDbM; set => new NotImplementedException(); }
 
+        [NotMapped] 
+        public override IAttraction Attraction {get => AttractionDbM; set => new NotImplementedException();}
+
         [JsonIgnore]
-        //[ForeignKey("UserId")] //create own Foreign Key step 2
+       
         public virtual csUserDbM UserDbM { get; set; } = null;
 
-        
+        [JsonIgnore]
+        public virtual csAttractionDbM AttractionDbM { get; set; } = null;
 
+         //[ForeignKey("UserId")] //create own Foreign Key step 2
 
         public override csReviewDbM Seed(csSeedGenerator _seeder)
         {

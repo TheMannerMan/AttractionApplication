@@ -19,3 +19,4 @@ C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbContext\obj\Debug\net8.0\DbContext.pdb
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbContext\obj\Debug\net8.0\DbContext.genruntimeconfig.cache
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbContext\obj\Debug\net8.0\ref\DbContext.dll
+C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbContext\obj\Debug\net8.0\DbContext.sourcelink.json

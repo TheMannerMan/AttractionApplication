@@ -11,6 +11,7 @@ namespace Models
         public Guid ReviewId { get; set; }
         public string Comment { get; set; }
         public IUser User { get; set; }
+        public IAttraction Attraction { get; set; }
 
     }
 }

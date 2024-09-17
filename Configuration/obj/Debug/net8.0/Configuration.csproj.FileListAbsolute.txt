@@ -10,3 +10,4 @@ C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\refint\Configuration.dll
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.pdb
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\ref\Configuration.dll
+C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.sourcelink.json

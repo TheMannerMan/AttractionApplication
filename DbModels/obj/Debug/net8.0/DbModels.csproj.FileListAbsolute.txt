@@ -15,3 +15,4 @@ C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbModels\obj\Debug\net8.0\refint\DbModels.dll
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbModels\obj\Debug\net8.0\DbModels.pdb
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbModels\obj\Debug\net8.0\ref\DbModels.dll
+C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbModels\obj\Debug\net8.0\DbModels.sourcelink.json

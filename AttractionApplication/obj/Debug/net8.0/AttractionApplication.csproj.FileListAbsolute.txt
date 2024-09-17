@@ -118,3 +118,4 @@ c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\AttractionApplication\bin\Debug\net8.0\DbContext.pdb
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\AttractionApplication\bin\Debug\net8.0\DbModels.pdb
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\AttractionApplication\bin\Debug\net8.0\DbRepos.pdb
+C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\AttractionApplication\obj\Debug\net8.0\AttractionApplication.sourcelink.json

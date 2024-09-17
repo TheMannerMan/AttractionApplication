@@ -20,18 +20,20 @@ namespace DbRepos
             }
         }
 
-        public void Seed(int _count)
+        public void Seed()
         {
             var _seeder = new csSeedGenerator();
 
             using (var db = csMainDbContext.DbContext("sysadmin"))
             {
                 var reviews = _seeder.ItemsToList<csReviewDbM>(100);
-                var users = _seeder.ItemsToList<csUserDbM>(100);
+                var users = _seeder.ItemsToList<csUserDbM>(50);
+                var attractions = _seeder.ItemsToList<csAttractionDbM>(1000);
 
                 foreach (var r in reviews)
                 {
                     r.UserDbM = _seeder.FromList(users);
+                    r.AttractionDbM = _seeder.FromList(attractions);
                 }
 
                 /*

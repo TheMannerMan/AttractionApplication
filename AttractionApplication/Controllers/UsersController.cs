@@ -42,16 +42,15 @@ namespace AttractionApplication.Controllers
         [ActionName("Seed")]
         [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> Seed(string count)
+        public async Task<IActionResult> Seed()
         {
             //_logger.LogInformation("Endpoint Attractions executed");
            try
             {
                 // _logger.LogInformation("Endpoint Seed executed");
-                int _count = int.Parse(count);
+                //int _count = int.Parse(count);
 
-                _uService.Seed(_count);
-
+                _uService.Seed();
                 return Ok("Seeded");
             }
             catch (Exception ex)

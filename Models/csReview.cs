@@ -11,6 +11,7 @@ namespace Models
         public virtual Guid ReviewId { get; set; } = Guid.NewGuid();
         public virtual string Comment { get; set; }
         public virtual IUser User { get; set; }
+        public virtual IAttraction Attraction { get; set; }
         public bool Seeded { get; set; } = false;
 
         public virtual csReview Seed(csSeedGenerator _seeder)

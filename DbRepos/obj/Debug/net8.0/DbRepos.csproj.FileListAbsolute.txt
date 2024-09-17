@@ -19,3 +19,4 @@ c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\refint\DbRepos.dll
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.pdb
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\ref\DbRepos.dll
+C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.sourcelink.json
