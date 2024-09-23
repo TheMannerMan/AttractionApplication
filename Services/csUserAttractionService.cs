@@ -17,11 +17,11 @@ namespace Services
 
         public Task<csRespPageDTO<IUser>> ReadUsersAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
             => _repo.ReadUsersAsync(seeded, flat, filter, pageNumber, pageSize);
-        public Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
-            => _repo.ReadAttractionsAsync(seeded, flat, filter, pageNumber, pageSize);
+        public Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
+            => _repo.ReadAttractionsAsync(seeded, flat, category, attractionName, description, city, country, pageNumber, pageSize);
         public Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
             => _repo.ReadLocationsAsync(seeded, flat, filter, pageNumber, pageSize);
-        public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize) 
+        public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
             => _repo.ReadReviewsAsync(seeded, flat, filter, pageNumber, pageSize);
 
         public csUserAttractionService(IUserAttractionRepo repo)

@@ -221,15 +221,15 @@ public class csUserAttractionRepo : IUserAttractionRepo
         }
     }
 
-    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
+    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            filter ??= "";
             IQueryable<csAttractionDbM> _query;
             if (flat)
             {
-                _query = db.Attractions.AsNoTracking();
+                _query = db.Attractions.AsNoTracking()
+                .Include(i => i.LocationDbM);
             }
             else
             {
@@ -239,25 +239,46 @@ public class csUserAttractionRepo : IUserAttractionRepo
                     .ThenInclude(r => r.UserDbM);
             }
 
+            _query = _query.Where(i => i.Seeded == seeded);
+
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                _query = _query.Where(i => i.Category.ToLower().Contains(category.ToLower()));
+            }
+
+
+            if (!string.IsNullOrEmpty(attractionName))
+            {
+                _query = _query.Where(i => i.AttractionName.ToLower().Contains(attractionName.ToLower()));
+            }
+
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                _query = _query.Where(i => i.Description.ToLower().Contains(description.ToLower()));
+            }
+
+
+            if (!string.IsNullOrEmpty(city))
+            {
+                _query = _query.Where(i => i.LocationDbM.City.ToLower().Contains(city.ToLower()));
+            }
+
+
+            if (!string.IsNullOrEmpty(country))
+            {
+                _query = _query.Where(i => i.LocationDbM.Country.ToLower().Contains(country.ToLower()));
+            }
+
             var _ret = new csRespPageDTO<IAttraction>()
             {
-                DbItemsCount = await _query
-
-            //Adding filter functionality
-            .Where(i => (i.Seeded == seeded) &&
-                        i.AttractionName.ToLower().Contains(filter)).CountAsync(),
+                DbItemsCount = await _query.CountAsync(),
 
                 PageItems = await _query
-
-            // Adding filter functionality
-            .Where(i => (i.Seeded == seeded) &&
-                        i.AttractionName.ToLower().Contains(filter))
-
-            // Adding paging
-            .Skip(pageNumber * pageSize)
-            .Take(pageSize)
-
-            .ToListAsync<IAttraction>(),
+                .Skip(pageNumber * pageSize)
+                .Take(pageSize)
+                .ToListAsync<IAttraction>(),
 
                 PageNr = pageNumber,
                 PageSize = pageSize
@@ -266,8 +287,61 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+    // Sparar för eventuellt senare bruk
+    /*public async Task<csRespPageDTO<ILocation>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
+        {
+            using (var db = csMainDbContext.DbContext("sysadmin"))
+            {
+                category ??= "";
+                attractionName ??= "";
+                description ??= "";
+                city ??= "";
+                country ??= "";
 
- public async Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
+                IQueryable<csAttractionDbM> _query;
+                if (flat)
+                {
+                    _query = db.Attractions.AsNoTracking()
+                    .Include(i => i.LocationDbM);
+                }
+                else
+                {
+                    _query = db.Attractions.AsNoTracking()
+                        .Include(i => i.LocationDbM)
+                        .Include(i => i.ReviewsDbM)
+                        .ThenInclude(r => r.UserDbM);
+                }
+
+                var _ret = new csRespPageDTO<IAttraction>()
+                {
+                    DbItemsCount = await _query
+
+                //Adding filter functionality
+                .Where(i => (i.Seeded == seeded) &&
+                            i.AttractionName.ToLower().Contains(filter)).CountAsync(),
+
+                    PageItems = await _query
+
+                // Adding filter functionality
+                .Where(i => (i.Seeded == seeded) &&
+                            i.AttractionName.ToLower().Contains(filter))
+
+                // Adding paging
+                .Skip(pageNumber * pageSize)
+                .Take(pageSize)
+
+                .ToListAsync<IAttraction>(),
+
+                    PageNr = pageNumber,
+                    PageSize = pageSize
+
+                };
+                return _ret;
+            }
+        }
+
+        */
+    public async Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
