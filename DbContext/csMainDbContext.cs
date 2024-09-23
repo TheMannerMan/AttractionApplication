@@ -23,10 +23,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<csUserDbM> Users { get; set; }
     public DbSet<csReviewDbM> Reviews { get; set; }
     public DbSet<csAttractionDbM> Attractions { get; set; }
-
     public DbSet<csLocationDbM> Locations { get; set; }
-    public DbSet<csAnimalDbM> Animals { get; set; }
-
     #endregion
 
 
@@ -86,9 +83,23 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
         #region override modelbuilder
 
         // Define unique index for City and Country in csLocationDbM
+        /* //SHOULD BE A ANNOTATION?
         modelBuilder.Entity<csLocationDbM>()
             .HasIndex(l => new { l.City, l.Country })
             .IsUnique();
+
+        */
+
+        modelBuilder.Entity("DbModels.csAttractionDbM", b =>
+        {
+            b.HasOne("DbModels.csLocationDbM", "LocationDbM")
+                .WithMany("AttractionsDbM")
+                .HasForeignKey("LocationId")
+                .OnDelete(DeleteBehavior.SetNull);
+
+            b.Navigation("LocationDbM");
+        });
+
 
         #endregion
 

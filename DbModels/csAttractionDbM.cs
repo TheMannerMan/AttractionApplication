@@ -6,7 +6,9 @@ using Models;
 using Seido.Utilities.SeedGenerator;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
+using Newtonsoft.Json; // la till denna TEST
+using Microsoft.EntityFrameworkCore; // la till denna TEST
 using Microsoft.AspNetCore.Mvc;
 
 namespace DbModels
@@ -16,17 +18,21 @@ namespace DbModels
         [Key]
         public override Guid AttractionId { get; set; } = Guid.NewGuid();
 
+        [Required]
+        public override string AttractionName { get; set; }
+
         [NotMapped]
         public override List<IReview> Reviews { get => ReviewsDbM?.ToList<IReview>(); set => new NotImplementedException(); }
-
-        [NotMapped]
-        public override ILocation Location { get => LocationDbM; set => new NotImplementedException(); }
-
         [JsonIgnore]
         public virtual List<csReviewDbM> ReviewsDbM { get; set; } = null;
 
+        [NotMapped]
+        public override ILocation Location { get => LocationDbM; set => new NotImplementedException(); }
         [JsonIgnore]
+        [ForeignKey("LocationId")]
         public virtual csLocationDbM LocationDbM { get; set; } = null;
+        [JsonIgnore]
+        public Guid? LocationId { get; set; }  // Change this to Guid? instead of int?
 
         csAttractionDbM ISeed<csAttractionDbM>.Seed(csSeedGenerator _seeder)
         {

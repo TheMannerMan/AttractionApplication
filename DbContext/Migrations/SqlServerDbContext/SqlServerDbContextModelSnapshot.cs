@@ -22,23 +22,6 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DbModels.csAnimalDbM", b =>
-                {
-                    b.Property<Guid>("AnimalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("Seeded")
-                        .HasColumnType("bit");
-
-                    b.HasKey("AnimalId");
-
-                    b.ToTable("Animals");
-                });
-
             modelBuilder.Entity("DbModels.csAttractionDbM", b =>
                 {
                     b.Property<Guid>("AttractionId")
@@ -46,6 +29,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AttractionName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Category")
@@ -54,7 +38,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<Guid?>("LocationDbMLocationId")
+                    b.Property<Guid?>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Seeded")
@@ -62,7 +46,7 @@ namespace DbContext.Migrations.SqlServerDbContext
 
                     b.HasKey("AttractionId");
 
-                    b.HasIndex("LocationDbMLocationId");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Attractions");
                 });
@@ -82,11 +66,10 @@ namespace DbContext.Migrations.SqlServerDbContext
                     b.Property<bool>("Seeded")
                         .HasColumnType("bit");
 
-                    b.HasKey("LocationId");
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(200)");
 
-                    b.HasIndex("City", "Country")
-                        .IsUnique()
-                        .HasFilter("[City] IS NOT NULL AND [Country] IS NOT NULL");
+                    b.HasKey("LocationId");
 
                     b.ToTable("Locations");
                 });
@@ -138,8 +121,9 @@ namespace DbContext.Migrations.SqlServerDbContext
             modelBuilder.Entity("DbModels.csAttractionDbM", b =>
                 {
                     b.HasOne("DbModels.csLocationDbM", "LocationDbM")
-                        .WithMany("AttractionDbMs")
-                        .HasForeignKey("LocationDbMLocationId");
+                        .WithMany("AttractionsDbM")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("LocationDbM");
                 });
@@ -166,7 +150,7 @@ namespace DbContext.Migrations.SqlServerDbContext
 
             modelBuilder.Entity("DbModels.csLocationDbM", b =>
                 {
-                    b.Navigation("AttractionDbMs");
+                    b.Navigation("AttractionsDbM");
                 });
 
             modelBuilder.Entity("DbModels.csUserDbM", b =>

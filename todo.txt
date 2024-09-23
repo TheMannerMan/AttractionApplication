@@ -1,0 +1,6 @@
+1. Remember to add indexes through annotation for the most used searches in the application. See the requirements for the assignment for help to figure out reasonable indexes.
+    Also watch the lecture 2024-09-18 11:18 for more info about index.
+
+2. Fundera var jag ska lägga till Unique index. T.ex.
+[Index(nameof(StreetAddress), nameof(ZipCode), nameof(City), nameof(Country), IsUnique = true)]
+Det ska finnas db modellerna. 

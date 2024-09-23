@@ -25,10 +25,9 @@ builder.Services.AddSwaggerGen();
 
 #region Dependency Inject
 //builder.Services.AddSingleton<IAnimalsService,csAnimalsService2>();
-builder.Services.AddScoped<IUserService,csUserService1>();
-builder.Services.AddScoped<IUserRepo, csUserRepo>();
-builder.Services.AddScoped<IAnimalRepo, csAnimalRepo>();
-builder.Services.AddScoped<IAnimalService, csAnimalServiceDb>();
+builder.Services.AddScoped<IUserAttractionService,csUserAttractionService>();
+builder.Services.AddScoped<IUserAttractionRepo, csUserAttractionRepo>();
+
 #endregion
 
 var app = builder.Build();

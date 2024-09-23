@@ -6,7 +6,8 @@ using Models;
 using Seido.Utilities.SeedGenerator;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+//using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace DbModels
 {
@@ -15,10 +16,10 @@ namespace DbModels
         [Key]
         public override Guid LocationId { get; set; } = Guid.NewGuid();
         [NotMapped]
-        public override List<IAttraction> Attractions { get => AttractionDbMs.ToList<IAttraction>(); set => new NotImplementedException(); }
+        public override List<IAttraction> Attractions { get => AttractionsDbM?.ToList<IAttraction>(); set => new NotImplementedException(); }
 
         [JsonIgnore]
-        public virtual List<csAttractionDbM> AttractionDbMs { get; set; } = null;
+        public virtual List<csAttractionDbM> AttractionsDbM { get; set; } = null;
 
         #region implementing IEquatable
 

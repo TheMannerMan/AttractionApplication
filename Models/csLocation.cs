@@ -11,7 +11,7 @@ namespace Models
         public virtual Guid LocationId { get; set; } = Guid.NewGuid();
         public string City { get; set; }
         public string Country { get; set; }
-
+        public string StreetAddress { get; set; }
         public virtual List<IAttraction> Attractions { get; set; }
 
         public bool Seeded { get; set; } = false;
@@ -31,6 +31,7 @@ namespace Models
             Seeded = true;
             Country = _seeder.Country;
             City = _seeder.City(Country);
+            StreetAddress = _seeder.StreetAddress(Country);
 
             return this;
         }

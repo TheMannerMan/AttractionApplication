@@ -555,22 +555,22 @@ namespace SeedGenerator
                         new csSeedAddress {
                             jsonCountry = "Sweden",
                             jsonCities = "Stockholm, Göteborg, Malmö, Uppsala, Linköping, Örebro",
-                            jsonStreets = "Svedjevägen, Ringvägen, Vasagatan, Odenplan, Birger Jarlsgatan, Äppelviksvägen, Kvarnbacksvägen"
+                            jsonStreets = "Svedjevägen, Ringvägen, Vasagatan, Odenplan, Birger Jarlsgatan, Äppelviksvägen, Kvarnbacksvägen, Drottninggatan, Hornsgatan, Kungsgatan, Storgatan, Karlavägen"
                         },
                         new csSeedAddress {
                             jsonCountry = "Norway",
                             jsonCities = "Oslo, Bergen, Trondheim, Stavanger, Dramen",
-                            jsonStreets = "Bygdoy alle, Frognerveien, Pilestredet, Vidars gate, Sågveien, Toftes gate, Gardeveiend",
+                            jsonStreets = "Bygdoy alle, Frognerveien, Pilestredet, Vidars gate, Sågveien, Toftes gate, Gardeveien, Storgata, Holbergs gate, Ullevålsveien, Kirkeveien, Karl Johans gate"
                     },
                         new csSeedAddress {
                             jsonCountry = "Denmark",
                             jsonCities = "Köpenhamn, Århus, Odense, Aahlborg, Esbjerg",
-                            jsonStreets = "Rolighedsvej, Fensmarkgade, Svanevej, Gröndalsvej, Githersgade, Classensgade, Moltekesvej"
+                            jsonStreets = "Rolighedsvej, Fensmarkgade, Svanevej, Gröndalsvej, Githersgade, Classensgade, Moltkesvej, Amagerbrogade, Nørrebrogade, Vesterbrogade, Frederiksborggade, Pilestræde"
                     },
                         new csSeedAddress {
                             jsonCountry = "Finland",
                             jsonCities = "Helsingfors, Espoo, Tampere, Vaanta, Oulu",
-                            jsonStreets = "Arkandiankatu, Liisankatu, Ruoholahdenkatu, Pohjoistranta, Eerikinkatu, Vauhtitie, Itainen Vaideki"
+                            jsonStreets = "Arkadiankatu, Liisankatu, Ruoholahdenkatu, Pohjoistranta, Eerikinkatu, Vauhtitie, Itäinen Valkokatu, Mannerheimvägen, Aleksis Kiven katu, Hämeentie, Porthaninkatu, Lauttasaarentie"
                     },
                 },
                 _names = new csSeedNames

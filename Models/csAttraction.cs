@@ -26,7 +26,7 @@ namespace Models
         };
 
         public virtual Guid AttractionId { get; set; } = Guid.NewGuid();
-        public string AttractionName { get; set; }
+        public virtual string AttractionName { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
         public virtual ILocation Location { get; set; }

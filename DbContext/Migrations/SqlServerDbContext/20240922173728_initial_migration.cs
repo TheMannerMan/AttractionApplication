@@ -6,24 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     /// <inheritdoc />
-    public partial class miInitial : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Animals",
-                columns: table => new
-                {
-                    AnimalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Seeded = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Animals", x => x.AnimalId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
@@ -31,6 +18,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                     LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     City = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    StreetAddress = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -56,8 +44,8 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LocationDbMLocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
@@ -66,10 +54,11 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     table.PrimaryKey("PK_Attractions", x => x.AttractionId);
                     table.ForeignKey(
-                        name: "FK_Attractions_Locations_LocationDbMLocationId",
-                        column: x => x.LocationDbMLocationId,
+                        name: "FK_Attractions_Locations_LocationId",
+                        column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "LocationId");
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,16 +87,9 @@ namespace DbContext.Migrations.SqlServerDbContext
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attractions_LocationDbMLocationId",
+                name: "IX_Attractions_LocationId",
                 table: "Attractions",
-                column: "LocationDbMLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Locations_City_Country",
-                table: "Locations",
-                columns: new[] { "City", "Country" },
-                unique: true,
-                filter: "[City] IS NOT NULL AND [Country] IS NOT NULL");
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_AttractionDbMAttractionId",
@@ -123,9 +105,6 @@ namespace DbContext.Migrations.SqlServerDbContext
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Animals");
-
             migrationBuilder.DropTable(
                 name: "Reviews");
 

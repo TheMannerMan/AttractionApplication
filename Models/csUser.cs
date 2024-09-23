@@ -11,7 +11,7 @@ public class csUser : IUser, ISeed<csUser>
     public virtual Guid UserId { get; set; } = Guid.NewGuid();
     public string UserName { get; set; }
 
-    public virtual List<IReview> Reviews { get; set; }
+    public virtual List<IReview> Reviews { get; set; } = null;
 
     public bool Seeded { get; set; } = false;
 
