@@ -75,7 +75,7 @@ namespace AttractionApplication.Controllers
         }
 
         [HttpGet()]
-        [ActionName("no-comments")]
+        [ActionName("Read-with-no-comments")]
         [ProducesResponseType(200, Type = typeof(csRespPageDTO<IAttraction>))]
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> ReadAttractionsWithoutComments(string seeded = "true",

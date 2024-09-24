@@ -71,6 +71,10 @@ namespace DbContext.Migrations.SqlServerDbContext
 
                     b.HasKey("LocationId");
 
+                    b.HasIndex("City", "Country", "StreetAddress")
+                        .IsUnique()
+                        .HasFilter("[City] IS NOT NULL AND [Country] IS NOT NULL AND [StreetAddress] IS NOT NULL");
+
                     b.ToTable("Locations");
                 });
 

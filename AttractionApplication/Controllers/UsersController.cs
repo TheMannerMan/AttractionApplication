@@ -22,7 +22,7 @@ namespace AttractionApplication.Controllers
         [ActionName("Read")]
         [ProducesResponseType(200, Type = typeof(csRespPageDTO<IUser>))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> Read(string seeded = "true", string flat = "true",
+        public async Task<IActionResult> Read(string seeded = "true", string flat = "false",
             string filter = null, string pageNr = "0", string pageSize = "10")
         {
             //_logger.LogInformation("Endpoint Attractions executed");

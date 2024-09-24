@@ -8,9 +8,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 //using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbModels
 {
+    [Index(nameof(City),nameof(Country),nameof(StreetAddress), IsUnique = true)]
     public class csLocationDbM : csLocation, ISeed<csLocationDbM>, IEquatable<csLocationDbM>
     {
         [Key]

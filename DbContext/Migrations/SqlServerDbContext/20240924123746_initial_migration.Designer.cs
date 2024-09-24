@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContext.Migrations.SqlServerDbContext
 {
     [DbContext(typeof(csMainDbContext.SqlServerDbContext))]
-    [Migration("20240924083137_initial_migration")]
+    [Migration("20240924123746_initial_migration")]
     partial class initial_migration
     {
         /// <inheritdoc />
@@ -73,6 +73,10 @@ namespace DbContext.Migrations.SqlServerDbContext
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("LocationId");
+
+                    b.HasIndex("City", "Country", "StreetAddress")
+                        .IsUnique()
+                        .HasFilter("[City] IS NOT NULL AND [Country] IS NOT NULL AND [StreetAddress] IS NOT NULL");
 
                     b.ToTable("Locations");
                 });

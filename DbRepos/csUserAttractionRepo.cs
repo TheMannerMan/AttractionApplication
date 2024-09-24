@@ -129,7 +129,7 @@ public class csUserAttractionRepo : IUserAttractionRepo
 
     #endregion
 
-
+    #region Users repo methods
     public async Task<csRespPageDTO<IUser>> ReadUsersAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
@@ -143,9 +143,7 @@ public class csUserAttractionRepo : IUserAttractionRepo
             else
             {
                 _query = db.Users.AsNoTracking()
-                    .Include(i => i.ReviewsDbM)
-                    .ThenInclude(r => r.AttractionDbM)
-                    .ThenInclude(a => a.LocationDbM);
+                    .Include(i => i.ReviewsDbM);
             }
 
             var _ret = new csRespPageDTO<IUser>()
@@ -175,6 +173,10 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+
+    #endregion
+
+    #region Reviews repo methods
 
     public async Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
     {
@@ -222,6 +224,9 @@ public class csUserAttractionRepo : IUserAttractionRepo
         }
     }
 
+    #endregion
+
+    #region Attractions repo methods
     public async Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
@@ -345,61 +350,9 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+    #endregion
 
-    // Sparar för eventuellt senare bruk
-    /*public async Task<csRespPageDTO<ILocation>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
-        {
-            using (var db = csMainDbContext.DbContext("sysadmin"))
-            {
-                category ??= "";
-                attractionName ??= "";
-                description ??= "";
-                city ??= "";
-                country ??= "";
-
-                IQueryable<csAttractionDbM> _query;
-                if (flat)
-                {
-                    _query = db.Attractions.AsNoTracking()
-                    .Include(i => i.LocationDbM);
-                }
-                else
-                {
-                    _query = db.Attractions.AsNoTracking()
-                        .Include(i => i.LocationDbM)
-                        .Include(i => i.ReviewsDbM)
-                        .ThenInclude(r => r.UserDbM);
-                }
-
-                var _ret = new csRespPageDTO<IAttraction>()
-                {
-                    DbItemsCount = await _query
-
-                //Adding filter functionality
-                .Where(i => (i.Seeded == seeded) &&
-                            i.AttractionName.ToLower().Contains(filter)).CountAsync(),
-
-                    PageItems = await _query
-
-                // Adding filter functionality
-                .Where(i => (i.Seeded == seeded) &&
-                            i.AttractionName.ToLower().Contains(filter))
-
-                // Adding paging
-                .Skip(pageNumber * pageSize)
-                .Take(pageSize)
-
-                .ToListAsync<IAttraction>(),
-
-                    PageNr = pageNumber,
-                    PageSize = pageSize
-
-                };
-                return _ret;
-            }
-        }
-
-        */
+    #region Locations repo methods
     public async Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
@@ -445,4 +398,6 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+
+    #endregion
 }

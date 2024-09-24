@@ -92,6 +92,13 @@ namespace DbContext.Migrations.SqlServerDbContext
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Locations_City_Country_StreetAddress",
+                table: "Locations",
+                columns: new[] { "City", "Country", "StreetAddress" },
+                unique: true,
+                filter: "[City] IS NOT NULL AND [Country] IS NOT NULL AND [StreetAddress] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_AttractionDbMAttractionId",
                 table: "Reviews",
                 column: "AttractionDbMAttractionId");

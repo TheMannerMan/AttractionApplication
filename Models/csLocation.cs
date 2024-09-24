@@ -9,9 +9,9 @@ namespace Models
     public class csLocation : ILocation, ISeed<csLocation>, IEquatable<csLocation>
     {
         public virtual Guid LocationId { get; set; } = Guid.NewGuid();
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string StreetAddress { get; set; }
+        public virtual string City { get; set; }
+        public virtual string Country { get; set; }
+        public virtual string StreetAddress { get; set; }
         public virtual List<IAttraction> Attractions { get; set; }
 
         public bool Seeded { get; set; } = false;
