@@ -50,6 +50,31 @@ namespace AttractionApplication.Controllers
         }
 
         [HttpGet()]
+        [ActionName("ReadItem")]
+        [ProducesResponseType(200, Type = typeof(IAttraction))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> ReadItem(string id = null, string flat = "true")
+        {
+            try
+            {
+                var _id = Guid.Parse(id);
+                bool _flat = bool.Parse(flat);
+
+                var item = await _service.ReadAttractionAsync(_id, _flat);
+                if (item == null)
+                {
+                    return BadRequest($"Item with id {id} does not exist");
+                }
+
+                return Ok(item);            
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet()]
         [ActionName("no-comments")]
         [ProducesResponseType(200, Type = typeof(csRespPageDTO<IAttraction>))]
         [ProducesResponseType(400, Type = typeof(string))]

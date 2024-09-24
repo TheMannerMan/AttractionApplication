@@ -4039,11 +4039,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
-              "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
+            "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
+              "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
             },
-            "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbContext\\DbContext.csproj": {
-              "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbContext\\DbContext.csproj"
+            "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbContext\\DbContext.csproj": {
+              "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbContext\\DbContext.csproj"
             }
           }
         }

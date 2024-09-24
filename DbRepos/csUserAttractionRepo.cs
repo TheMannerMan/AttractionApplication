@@ -289,6 +289,29 @@ public class csUserAttractionRepo : IUserAttractionRepo
         }
     }
 
+    public async Task<IAttraction> ReadAttractionAsync(Guid id, bool flat)
+    {
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            IQueryable<IAttraction> _query;
+
+            if (flat)
+                _query = db.Attractions.AsNoTracking()
+                        .Include(a => a.ReviewsDbM)
+                        .Where(i => i.AttractionId == id);
+
+            else
+                _query = db.Attractions.AsNoTracking()
+                        .Include(a => a.ReviewsDbM)
+                        .ThenInclude(r => r.UserDbM)
+                        .Include(a => a.LocationDbM)
+                        .Where(i => i.AttractionId == id);
+
+            return await _query.FirstOrDefaultAsync<IAttraction>();
+        }
+
+    }
+
     public async Task<csRespPageDTO<IAttraction>> ReadAttractionsNoCommentsAsync(bool seeded, bool flat, int pageNumber, int pageSize)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))

@@ -21,6 +21,8 @@ namespace Services
             => _repo.ReadAttractionsAsync(seeded, flat, category, attractionName, description, city, country, pageNumber, pageSize);
         public Task<csRespPageDTO<IAttraction>> ReadAttractionsNoCommentsAsync(bool seeded, bool flat, int pageNumber, int pageSize) 
             => _repo.ReadAttractionsNoCommentsAsync(seeded, flat, pageNumber, pageSize);
+
+        public Task<IAttraction> ReadAttractionAsync(Guid id, bool flat) => _repo.ReadAttractionAsync(id, flat);
         public Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
             => _repo.ReadLocationsAsync(seeded, flat, filter, pageNumber, pageSize);
         public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)

@@ -19,6 +19,7 @@ namespace DbRepos
         public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize);
         public Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, 
                                                         string description, string city, string country, int pageNumber, int pageSize);
+        public Task<IAttraction> ReadAttractionAsync(Guid id, bool flat);
         public Task<csRespPageDTO<IAttraction>> ReadAttractionsNoCommentsAsync(bool _seeded, bool _flat, int _pageNr, int _pageSize);
         public Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize);
 

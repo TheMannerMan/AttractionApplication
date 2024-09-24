@@ -4,14 +4,14 @@
     "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbModels\\DbModels.csproj": {}
   },
   "projects": {
-    "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
+    "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj",
+        "projectUniqueName": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj",
         "projectName": "Configuration",
-        "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj",
+        "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj",
         "packagesPath": "C:\\Users\\henri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\obj\\",
+        "outputPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\henri\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -102,8 +102,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
-                "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
+              "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
+                "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
               },
               "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Models\\Models.csproj": {
                 "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Models\\Models.csproj"
@@ -181,8 +181,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
-                "projectPath": "C:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
+              "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj": {
+                "projectPath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\Configuration\\Configuration.csproj"
               }
             }
           }
