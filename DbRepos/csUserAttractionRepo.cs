@@ -10,6 +10,7 @@ using Models.DTO;
 using Microsoft.AspNetCore.Identity.Data;
 using SQLitePCL;
 using System.Net.Http.Headers;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DbRepos;
 
@@ -287,6 +288,41 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+
+    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsNoCommentsAsync(bool seeded, bool flat, int pageNumber, int pageSize)
+    {
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            IQueryable<csAttractionDbM> _query;
+
+            if (flat)
+            {
+                _query = db.Attractions.AsNoTracking();
+            }
+            else
+            {
+                _query = db.Attractions.AsNoTracking().Include(a => a.ReviewsDbM).Include(a => a.LocationDbM);
+            }
+
+            _query = _query.Where(i => i.Seeded == seeded && !i.ReviewsDbM.Any());
+
+            var _ret = new csRespPageDTO<IAttraction>()
+            {
+                DbItemsCount = await _query.CountAsync(),
+
+                PageItems = await _query
+                .Skip(pageNumber * pageSize)
+                .Take(pageSize)
+                .ToListAsync<IAttraction>(),
+
+                PageNr = pageNumber,
+                PageSize = pageSize
+
+            };
+            return _ret;
+        }
+    }
+
     // Sparar för eventuellt senare bruk
     /*public async Task<csRespPageDTO<ILocation>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
         {
