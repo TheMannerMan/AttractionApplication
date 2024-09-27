@@ -106,11 +106,6 @@ public class csUserAttractionRepo : IUserAttractionRepo
                 }
             }
 
-            foreach (var loc in locations)
-            {
-                System.Console.WriteLine($"{loc.City} {loc.Country} ID: {loc.LocationId}");
-            }
-
             db.Locations.AddRange(locations);
             db.Users.AddRange(users);
             db.Attractions.AddRange(attractions);

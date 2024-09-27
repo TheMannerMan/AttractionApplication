@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AttractionApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dde3fe90fc48a0cde99d6e5efbe167c5623b379")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+004a8fb9ed8492efbd42c4e0289b07c9b4c59188")]
 [assembly: System.Reflection.AssemblyProductAttribute("AttractionApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AttractionApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

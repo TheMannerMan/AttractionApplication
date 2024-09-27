@@ -20,3 +20,25 @@ c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.pdb
 c:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\ref\DbRepos.dll
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.sourcelink.json
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbRepos.deps.json
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbRepos.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbRepos.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\Configuration.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbContext.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbModels.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\Models.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\Configuration.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbContext.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\DbModels.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\bin\Debug\net8.0\Models.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.csproj.AssemblyReference.cache
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.AssemblyInfoInputs.cache
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.AssemblyInfo.cs
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.csproj.CoreCompileInputs.cache
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.sourcelink.json
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.csproj.Up2Date
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\refint\DbRepos.dll
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\DbRepos.pdb
+c:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\DbRepos\obj\Debug\net8.0\ref\DbRepos.dll

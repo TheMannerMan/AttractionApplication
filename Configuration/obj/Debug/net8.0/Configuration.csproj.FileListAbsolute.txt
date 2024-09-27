@@ -11,3 +11,16 @@ C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.pdb
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\ref\Configuration.dll
 C:\Users\henri\Documents\Programmering\Studier\8. Dataåtkomster i .NET\myRepos\Assignment\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.sourcelink.json
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\bin\Debug\net8.0\Configuration.deps.json
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\bin\Debug\net8.0\Configuration.dll
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\bin\Debug\net8.0\Configuration.pdb
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.csproj.AssemblyReference.cache
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.AssemblyInfoInputs.cache
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.AssemblyInfo.cs
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.csproj.CoreCompileInputs.cache
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.sourcelink.json
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.dll
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\refint\Configuration.dll
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\Configuration.pdb
+C:\Users\henri\OneDrive\.NET\Dataåtkomster i .NET\myRepos\AttractionApplication\Configuration\obj\Debug\net8.0\ref\Configuration.dll
