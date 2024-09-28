@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Seido.Utilities.SeedGenerator;
 using Configuration;
 using Models;
+using Models.DTO;
 namespace DbModels
 {
     public class csReviewDbM : csReview, ISeed<csReviewDbM>
@@ -16,22 +17,38 @@ namespace DbModels
         [NotMapped]
         public override IUser User { get => UserDbM; set => new NotImplementedException(); }
 
-        [NotMapped] 
-        public override IAttraction Attraction {get => AttractionDbM; set => new NotImplementedException();}
+        [NotMapped]
+        public override IAttraction Attraction { get => AttractionDbM; set => new NotImplementedException(); }
 
         [JsonIgnore]
-       
+
         public virtual csUserDbM UserDbM { get; set; } = null;
 
         [JsonIgnore]
         public virtual csAttractionDbM AttractionDbM { get; set; } = null;
 
-         //[ForeignKey("UserId")] //create own Foreign Key step 2
+        //[ForeignKey("UserId")] //create own Foreign Key step 2
 
         public override csReviewDbM Seed(csSeedGenerator _seeder)
         {
             base.Seed(_seeder);
             return this;
+        }
+
+        public csReviewDbM UpdateFromDTO(csReviewCUdto org)
+        {
+            Comment = org.Comment;
+            return this;
+        }
+
+        public csReviewDbM()
+        {
+
+        }
+        public csReviewDbM(csReviewCUdto org)
+        {
+            ReviewId = Guid.NewGuid();
+            UpdateFromDTO(org);
         }
     }
 }

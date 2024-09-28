@@ -14,7 +14,7 @@ namespace AttractionApplication.Controllers
     public class UsersController : ControllerBase
     {
         //private ILogger<csAttractionController> _logger = null;
-        private IUserAttractionService _uService = null;
+        private IUserAttractionService _service = null;
 
 
         //GET: api/csAdmin/Attractions
@@ -22,7 +22,7 @@ namespace AttractionApplication.Controllers
         [ActionName("Read")]
         [ProducesResponseType(200, Type = typeof(csRespPageDTO<IUser>))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> Read(string seeded = "true", string flat = "false",
+        public async Task<IActionResult> Read(string seeded = "true", string flat = "true",
             string filter = null, string pageNr = "0", string pageSize = "10")
         {
             //_logger.LogInformation("Endpoint Attractions executed");
@@ -33,7 +33,7 @@ namespace AttractionApplication.Controllers
                 int _pageNr = int.Parse(pageNr);
                 int _pageSize = int.Parse(pageSize);
 
-                var _users = await _uService.ReadUsersAsync(_seeded, _flat, filter?.Trim()?.ToLower(), _pageNr, _pageSize);
+                var _users = await _service.ReadUsersAsync(_seeded, _flat, filter?.Trim()?.ToLower(), _pageNr, _pageSize);
 
                 return Ok(_users);
             }
@@ -42,6 +42,57 @@ namespace AttractionApplication.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet()]
+        [ActionName("ReadItem")]
+        [ProducesResponseType(200, Type = typeof(IUser))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> ReadItem(string id = null, string flat = "true")
+        {
+            try
+            {
+                var _id = Guid.Parse(id);
+                bool _flat = bool.Parse(flat);
+
+                var item = await _service.ReadUserAsync(_id, _flat);
+                if (item == null)
+                {
+                    return BadRequest($"Item with id {id} does not exist");
+                }
+
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpGet()]
+        [ActionName("ReadItemDto")]
+        [ProducesResponseType(200, Type = typeof(csUserCUdto))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        [ProducesResponseType(404, Type = typeof(string))]
+        public async Task<IActionResult> ReadItemDto(string id = null)
+        {
+            try
+            {
+                var _id = Guid.Parse(id);
+
+                var item = await _service.ReadUserAsync(_id, false);
+                if (item == null)
+                {
+                    return BadRequest($"Item with id {id} does not exist");
+                }
+
+                var dto = new csUserCUdto(item);
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -54,7 +105,7 @@ namespace AttractionApplication.Controllers
             {
                 Guid _id = Guid.Parse(id);
 
-                var _resp = await _uService.DeleteUserAsync(_id);
+                var _resp = await _service.DeleteUserAsync(_id);
 
                 if (_resp == null)
                 {
@@ -69,9 +120,51 @@ namespace AttractionApplication.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        [ActionName("UpdateItem")] //
+        [ProducesResponseType(200, Type = typeof(csUserCUdto))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> UpdateItem(string id, [FromBody] csUserCUdto item)
+        {
+            try
+            {
+                var _id = Guid.Parse(id);
+
+                if (item.UserId != _id)
+                    throw new Exception("Id mismatch");
+
+                var _item = await _service.UpdateUserAsync(item);
+
+                return Ok(_item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not update. Error {ex.Message}");
+            }
+        }
+        
+        [HttpPost()]
+        [ActionName("CreateItem")]
+        [ProducesResponseType(200, Type = typeof(IUser))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> CreateItem([FromBody] csUserCUdto item)
+        {
+            try
+            {
+                var _item = await _service.CreateUserAsync(item);
+               
+
+                return Ok(_item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not create. Error {ex.Message}");
+            }
+        }
+
         public UsersController(IUserAttractionService service)
         {
-            _uService = service;
+            _service = service;
         }
     }
 }
