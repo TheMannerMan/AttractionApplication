@@ -194,6 +194,7 @@ public class csUserAttractionRepo : IUserAttractionRepo
         }
     }
 
+    
     #endregion
 
     #region Reviews repo methods
@@ -420,9 +421,27 @@ public class csUserAttractionRepo : IUserAttractionRepo
             await db.SaveChangesAsync();
 
             //return the updated item in non-flat mode
-            return await ReadAttractionAsync(_item.AttractionId, false);    
+            return await ReadAttractionAsync(_item.AttractionId, false);
         }
     }
+    
+    public async Task<IAttraction> CreateAttractionAsync(csAttractionCUdto itemDto)
+    {
+        
+         if (itemDto.AttractionId != null)
+            throw new ArgumentException($"{nameof(itemDto.AttractionId)} must be null when creating a new object");
+        
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            var newItem =  new csAttractionDbM(itemDto);
+            
+            await navProp_csAttractionCUdto_to_csAttractionDbM(db, itemDto, newItem);
+            db.Attractions.Add(newItem);
+            await db.SaveChangesAsync();
+            return await ReadAttractionAsync(newItem.AttractionId, false);
+        }
+    }
+    
     private static async Task navProp_csAttractionCUdto_to_csAttractionDbM(csMainDbContext db, csAttractionCUdto _itemDtoSrc, csAttractionDbM _itemDst)
     {
         //update LocationDbM from itemDto.LocationId

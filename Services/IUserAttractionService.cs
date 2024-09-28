@@ -18,8 +18,8 @@ namespace Services
         public Task<IUser> DeleteUserAsync(Guid id);
         public Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize, bool noComments);
         public Task<IAttraction> ReadAttractionAsync(Guid id, bool flat);
-
         public Task<IAttraction> UpdateAttractionAsync(csAttractionCUdto itemDto);
+        public Task<IAttraction> CreateAttractionAsync(csAttractionCUdto itemDto);
         public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize);
         public Task<IReview> DeleteReviewAsync(Guid id);
         public Task<IAttraction> DeleteAttractionAsync(Guid id);

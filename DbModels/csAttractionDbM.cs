@@ -51,5 +51,16 @@ namespace DbModels
             return this;
         }
         #endregion
+
+        public csAttractionDbM()
+        {          
+        }
+
+        public csAttractionDbM(csAttractionCUdto org)
+        {
+            AttractionId = Guid.NewGuid();
+            UpdateFromDTO(org);
+        }
+
     }
 }

@@ -26,6 +26,8 @@ namespace Services
         public Task<IAttraction> DeleteAttractionAsync(Guid id) => _repo.DeleteAttractionAsync(id);
 
         public Task<IAttraction> UpdateAttractionAsync(csAttractionCUdto itemDto) => _repo.UpdateAttractionAsync(itemDto);
+
+        public Task<IAttraction> CreateAttractionAsync(csAttractionCUdto itemDto) => _repo.CreateAttractionAsync(itemDto);
         public Task<csRespPageDTO<ILocation>> ReadLocationsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)
             => _repo.ReadLocationsAsync(seeded, flat, filter, pageNumber, pageSize);
         public Task<csRespPageDTO<IReview>> ReadReviewsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize)

@@ -16,6 +16,7 @@ namespace Models.DTO
         public virtual List<Guid> ReviewsId { get; set; }
         //public csAttractionCUdto() {}
 
+        public csAttractionCUdto() { }
         public csAttractionCUdto(IAttraction org)
         {
             AttractionId = org.AttractionId;

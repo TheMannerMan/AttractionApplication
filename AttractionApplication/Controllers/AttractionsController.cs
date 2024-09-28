@@ -111,7 +111,7 @@ namespace AttractionApplication.Controllers
             try
             {
                 var _id = Guid.Parse(id);
-                
+
                 var item = await _service.ReadAttractionAsync(_id, false);
                 if (item == null)
                 {
@@ -119,7 +119,7 @@ namespace AttractionApplication.Controllers
                 }
 
                 var dto = new csAttractionCUdto(item);
-                return Ok(dto);          
+                return Ok(dto);
             }
             catch (Exception ex)
             {
@@ -127,7 +127,7 @@ namespace AttractionApplication.Controllers
             }
         }
 
-         [HttpPut("{id}")]
+        [HttpPut("{id}")]
         [ActionName("UpdateItem")] //
         [ProducesResponseType(200, Type = typeof(csAttractionCUdto))]
         [ProducesResponseType(400, Type = typeof(string))]
@@ -141,12 +141,31 @@ namespace AttractionApplication.Controllers
                     throw new Exception("Id mismatch");
 
                 var _item = await _service.UpdateAttractionAsync(item);
-                              
-                return Ok(_item);       
+
+                return Ok(_item);
             }
             catch (Exception ex)
             {
                 return BadRequest($"Could not update. Error {ex.Message}");
+            }
+        }
+
+        [HttpPost()]
+        [ActionName("CreateItem")]
+        [ProducesResponseType(200, Type = typeof(IAttraction))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> CreateItem([FromBody] csAttractionCUdto item)
+        {
+            try
+            {
+                var _item = await _service.CreateAttractionAsync(item);
+               
+
+                return Ok(_item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not create. Error {ex.Message}");
             }
         }
 
