@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jE/UKndzAL0=",
+  "dgSpecHash": "sIy5TJLkRrY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\henri\\OneDrive\\.NET\\Dataåtkomster i .NET\\myRepos\\AttractionApplication\\DbModels\\DbModels.csproj",
+  "projectFilePath": "c:\\Users\\henri\\Documents\\Programmering\\Studier\\8. Dataåtkomster i .NET\\myRepos\\Assignment\\AttractionApplication\\DbModels\\DbModels.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\henri\\.nuget\\packages\\efcore.checkconstraints\\8.0.1\\efcore.checkconstraints.8.0.1.nupkg.sha512",
     "C:\\Users\\henri\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.8\\microsoft.aspnetcore.jsonpatch.8.0.8.nupkg.sha512",

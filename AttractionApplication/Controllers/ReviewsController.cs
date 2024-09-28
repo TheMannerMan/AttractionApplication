@@ -41,7 +41,31 @@ namespace AttractionApplication.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
 
+         [HttpDelete("{id}")]
+        [ActionName("DeleteItem")]
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> DeleteItem(string id)
+        {
+            try
+            {
+                Guid _id = Guid.Parse(id);
+
+                var _resp = await _uService.DeleteReviewAsync(_id);
+
+                if (_resp == null)
+                {
+                    return BadRequest($"Item with {id} does not exist");
+                }
+
+                return Ok(_resp);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         public ReviewsController(IUserAttractionService service)

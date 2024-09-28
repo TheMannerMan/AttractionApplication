@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json; // la till denna TEST
 using Microsoft.EntityFrameworkCore; // la till denna TEST
 using Microsoft.AspNetCore.Mvc;
+using Models.DTO;
 
 namespace DbModels
 {
@@ -39,5 +40,16 @@ namespace DbModels
             base.Seed(_seeder);
             return this;
         }
+
+        #region Update from DTO
+        public csAttractionDbM UpdateFromDTO(csAttractionCUdto org)
+        {
+            AttractionName = org.AttractionName;
+            Description = org.Description;
+            Category = org.Category;
+
+            return this;
+        }
+        #endregion
     }
 }

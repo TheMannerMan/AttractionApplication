@@ -57,8 +57,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                         name: "FK_Attractions_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "LocationId",
-                        onDelete: ReferentialAction.SetNull);
+                        principalColumn: "LocationId");
                 });
 
             migrationBuilder.CreateTable(
@@ -78,12 +77,14 @@ namespace DbContext.Migrations.SqlServerDbContext
                         name: "FK_Reviews_Attractions_AttractionDbMAttractionId",
                         column: x => x.AttractionDbMAttractionId,
                         principalTable: "Attractions",
-                        principalColumn: "AttractionId");
+                        principalColumn: "AttractionId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_Users_UserDbMUserId",
                         column: x => x.UserDbMUserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -96,9 +96,6 @@ namespace Models
         public virtual ILocation Location { get; set; }
         public virtual List<IReview> Reviews { get; set; }
 
-        // TODO: Add when Location is implemented.
-        // public virtual ILocation Location {get; set;}
-
         public bool Seeded { get; set; } = false;
 
         public virtual csAttraction Seed(csSeedGenerator _seeder)

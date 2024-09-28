@@ -90,7 +90,24 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         */
 
-        modelBuilder.Entity("DbModels.csAttractionDbM", b =>
+        modelBuilder.Entity("DbModels.csReviewDbM", b =>
+                {
+                    b.HasOne("DbModels.csAttractionDbM", "AttractionDbM")
+                        .WithMany("ReviewsDbM")
+                        .HasForeignKey("AttractionDbMAttractionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DbModels.csUserDbM", "UserDbM")
+                        .WithMany("ReviewsDbM")
+                        .HasForeignKey("UserDbMUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("AttractionDbM");
+
+                    b.Navigation("UserDbM");
+                });
+
+        /*modelBuilder.Entity("DbModels.csAttractionDbM", b =>
         {
             b.HasOne("DbModels.csLocationDbM", "LocationDbM")
                 .WithMany("AttractionsDbM")
@@ -98,7 +115,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
                 .OnDelete(DeleteBehavior.SetNull);
 
             b.Navigation("LocationDbM");
-        });
+        }); */
 
 
         #endregion

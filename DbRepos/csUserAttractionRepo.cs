@@ -168,6 +168,31 @@ public class csUserAttractionRepo : IUserAttractionRepo
             return _ret;
         }
     }
+    public async Task<IUser> DeleteUserAsync(Guid id)
+    {
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            var _query = db.Users.Where(a => a.UserId == id);
+            var _deleteItem = await _query.FirstOrDefaultAsync<csUserDbM>();
+
+            if (_deleteItem is null)
+                throw new ArgumentException($"Item {id} is not existing in the database");
+
+            db.Users.Remove(_deleteItem);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+
+            return _deleteItem;
+        }
+    }
 
     #endregion
 
@@ -219,18 +244,42 @@ public class csUserAttractionRepo : IUserAttractionRepo
         }
     }
 
+    public async Task<IReview> DeleteReviewAsync(Guid id)
+    {
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            var _query = db.Reviews.Where(a => a.ReviewId == id);
+            var _deleteItem = await _query.FirstOrDefaultAsync<csReviewDbM>();
+
+            if (_deleteItem is null)
+                throw new ArgumentException($"Item {id} is not existing in the database");
+
+            db.Reviews.Remove(_deleteItem);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+
+            return _deleteItem;
+        }
+    }
     #endregion
 
     #region Attractions repo methods
-    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize)
+    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsAsync(bool seeded, bool flat, string category, string attractionName, string description, string city, string country, int pageNumber, int pageSize, bool noComments)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
             IQueryable<csAttractionDbM> _query;
             if (flat)
             {
-                _query = db.Attractions.AsNoTracking()
-                .Include(i => i.LocationDbM);
+                _query = db.Attractions.AsNoTracking();
             }
             else
             {
@@ -241,6 +290,10 @@ public class csUserAttractionRepo : IUserAttractionRepo
             }
 
             _query = _query.Where(i => i.Seeded == seeded);
+
+            // Filters to only show attractions with no comments.
+            if (noComments)
+                _query = _query.Where(i => !i.ReviewsDbM.Any());
 
 
             if (!string.IsNullOrEmpty(category))
@@ -312,39 +365,89 @@ public class csUserAttractionRepo : IUserAttractionRepo
 
     }
 
-    public async Task<csRespPageDTO<IAttraction>> ReadAttractionsNoCommentsAsync(bool seeded, bool flat, int pageNumber, int pageSize)
+    public async Task<IAttraction> DeleteAttractionAsync(Guid id)
     {
         using (var db = csMainDbContext.DbContext("sysadmin"))
         {
-            IQueryable<csAttractionDbM> _query;
+            var _query = db.Attractions.Where(a => a.AttractionId == id);
+            var _deleteItem = await _query.FirstOrDefaultAsync<csAttractionDbM>();
 
-            if (flat)
+            if (_deleteItem is null)
+                throw new ArgumentException($"Item {id} is not existing in the database");
+
+            db.Attractions.Remove(_deleteItem);
+            try
             {
-                _query = db.Attractions.AsNoTracking();
+                await db.SaveChangesAsync();
             }
-            else
+            catch (Exception ex)
             {
-                _query = db.Attractions.AsNoTracking().Include(a => a.ReviewsDbM).Include(a => a.LocationDbM);
+                Console.WriteLine(ex.Message);
             }
 
-            _query = _query.Where(i => i.Seeded == seeded && !i.ReviewsDbM.Any());
 
-            var _ret = new csRespPageDTO<IAttraction>()
-            {
-                DbItemsCount = await _query.CountAsync(),
 
-                PageItems = await _query
-                .Skip(pageNumber * pageSize)
-                .Take(pageSize)
-                .ToListAsync<IAttraction>(),
-
-                PageNr = pageNumber,
-                PageSize = pageSize
-
-            };
-            return _ret;
+            return _deleteItem;
         }
     }
+
+    public async Task<IAttraction> UpdateAttractionAsync(csAttractionCUdto itemDto)
+    {
+        using (var db = csMainDbContext.DbContext("sysadmin"))
+        {
+            //Find the instance with matching id and read the navigation properties.
+            var _query1 = db.Attractions
+                .Where(i => i.AttractionId == itemDto.AttractionId);
+            var _item = await _query1
+                .Include(i => i.LocationDbM)
+                .Include(i => i.ReviewsDbM)
+                .FirstOrDefaultAsync<csAttractionDbM>();
+
+            //If the item does not exists
+            if (_item == null) throw new ArgumentException($"Item {itemDto.AttractionId} is not existing");
+
+            //transfer any changes from DTO to database objects
+            //Update individual properties
+            _item.UpdateFromDTO(itemDto);
+
+            //Update navigation properties
+            await navProp_csAttractionCUdto_to_csAttractionDbM(db, itemDto, _item);
+
+            //write to database model
+            db.Attractions.Update(_item);
+
+            //write to database in a UoW
+            await db.SaveChangesAsync();
+
+            //return the updated item in non-flat mode
+            return await ReadAttractionAsync(_item.AttractionId, false);    
+        }
+    }
+    private static async Task navProp_csAttractionCUdto_to_csAttractionDbM(csMainDbContext db, csAttractionCUdto _itemDtoSrc, csAttractionDbM _itemDst)
+    {
+        //update LocationDbM from itemDto.LocationId
+        _itemDst.LocationDbM = (_itemDtoSrc.LocationId != null) ? await db.Locations.FirstOrDefaultAsync(
+            a => (a.LocationId == _itemDtoSrc.LocationId)) : null;
+
+        //update ReviewsDbM from itemDto.ReviewsId list
+        List<csReviewDbM> _reviews = null;
+        if (_itemDtoSrc.ReviewsId != null)
+        {
+            _reviews = new List<csReviewDbM>();
+            foreach (var id in _itemDtoSrc.ReviewsId)
+            {
+                var r = await db.Reviews.FirstOrDefaultAsync(i => i.ReviewId == id);
+                if (r == null)
+                    throw new ArgumentException($"Item id {id} not existing");
+
+                _reviews.Add(r);
+            }
+        }
+        _itemDst.ReviewsDbM = _reviews;
+    }
+
+
+
     #endregion
 
     #region Locations repo methods

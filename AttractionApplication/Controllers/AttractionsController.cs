@@ -23,24 +23,26 @@ namespace AttractionApplication.Controllers
         [ProducesResponseType(400, Type = typeof(string))]
         public async Task<IActionResult> Read(string seeded = "true",
                                                 string flat = "true",
-                                                string category = null, 
-                                                string attractionName = null, 
+                                                string category = null,
+                                                string attractionName = null,
                                                 string description = null,
                                                 string city = null,
-                                                string country = null, 
-                                                string pageNr = "0", 
+                                                string country = null,
+                                                string showOnlyWithNoComments = "false",
+                                                string pageNr = "0",
                                                 string pageSize = "10")
         {
             try
             {
                 bool _seeded = bool.Parse(seeded);
                 bool _flat = bool.Parse(flat);
+                bool _noComments = bool.Parse(showOnlyWithNoComments);
                 int _pageNr = int.Parse(pageNr);
                 int _pageSize = int.Parse(pageSize);
 
-                var _resp = await _service.ReadAttractionsAsync(_seeded, _flat, category?.Trim()?.ToLower(), 
-                    attractionName?.Trim()?.ToLower(), description?.Trim()?.ToLower(), city?.Trim()?.ToLower(), 
-                    country?.Trim()?.ToLower(), _pageNr, _pageSize);
+                var _resp = await _service.ReadAttractionsAsync(_seeded, _flat, category?.Trim()?.ToLower(),
+                    attractionName?.Trim()?.ToLower(), description?.Trim()?.ToLower(), city?.Trim()?.ToLower(),
+                    country?.Trim()?.ToLower(), _pageNr, _pageSize, _noComments);
                 return Ok(_resp);
             }
             catch (Exception ex)
@@ -66,7 +68,32 @@ namespace AttractionApplication.Controllers
                     return BadRequest($"Item with id {id} does not exist");
                 }
 
-                return Ok(item);            
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [ActionName("DeleteItem")]
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> DeleteITem(string id)
+        {
+            try
+            {
+                Guid _id = Guid.Parse(id);
+
+                var _resp = await _service.DeleteAttractionAsync(_id);
+
+                if (_resp == null)
+                {
+                    return BadRequest($"Item with {id} does not exist");
+                }
+
+                return Ok(_resp);
             }
             catch (Exception ex)
             {
@@ -75,27 +102,51 @@ namespace AttractionApplication.Controllers
         }
 
         [HttpGet()]
-        [ActionName("Read-with-no-comments")]
-        [ProducesResponseType(200, Type = typeof(csRespPageDTO<IAttraction>))]
+        [ActionName("ReadItemDto")]
+        [ProducesResponseType(200, Type = typeof(csAttractionCUdto))]
         [ProducesResponseType(400, Type = typeof(string))]
-        public async Task<IActionResult> ReadAttractionsWithoutComments(string seeded = "true",
-                                                string flat = "true", 
-                                                string pageNr = "0", 
-                                                string pageSize = "10")
+        [ProducesResponseType(404, Type = typeof(string))]
+        public async Task<IActionResult> ReadItemDto(string id = null)
         {
             try
             {
-                bool _seeded = bool.Parse(seeded);
-                bool _flat = bool.Parse(flat);
-                int _pageNr = int.Parse(pageNr);
-                int _pageSize = int.Parse(pageSize);
+                var _id = Guid.Parse(id);
+                
+                var item = await _service.ReadAttractionAsync(_id, false);
+                if (item == null)
+                {
+                    return BadRequest($"Item with id {id} does not exist");
+                }
 
-                var _resp = await _service.ReadAttractionsNoCommentsAsync(_seeded, _flat, _pageNr, _pageSize);
-                return Ok(_resp);
+                var dto = new csAttractionCUdto(item);
+                return Ok(dto);          
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+         [HttpPut("{id}")]
+        [ActionName("UpdateItem")] //
+        [ProducesResponseType(200, Type = typeof(csAttractionCUdto))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        public async Task<IActionResult> UpdateItem(string id, [FromBody] csAttractionCUdto item)
+        {
+            try
+            {
+                var _id = Guid.Parse(id);
+
+                if (item.AttractionId != _id)
+                    throw new Exception("Id mismatch");
+
+                var _item = await _service.UpdateAttractionAsync(item);
+                              
+                return Ok(_item);       
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not update. Error {ex.Message}");
             }
         }
 
