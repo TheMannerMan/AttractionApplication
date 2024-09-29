@@ -15,6 +15,7 @@ namespace AttractionApplication.Controllers
     {
         //private ILogger<csAttractionController> _logger = null;
         private IUserAttractionService _service = null;
+        ILogger<ReviewsController> _logger = null;
 
 
         //GET: api/csAdmin/Attractions
@@ -84,7 +85,7 @@ namespace AttractionApplication.Controllers
                 {
                     return BadRequest($"Item with {id} does not exist");
                 }
-
+                _logger.LogInformation($"item {_id} deleted");
                 return Ok(_resp);
             }
             catch (Exception ex)
@@ -133,7 +134,7 @@ namespace AttractionApplication.Controllers
                     throw new Exception("Id mismatch");
 
                 var _item = await _service.UpdateReviewAsync(item);
-
+                _logger.LogInformation($"item {_id} updated");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -151,8 +152,8 @@ namespace AttractionApplication.Controllers
             try
             {
                 var _item = await _service.CreateReviewAsync(item);
-               
 
+                _logger.LogInformation($"item {_item.ReviewId} created");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -161,9 +162,10 @@ namespace AttractionApplication.Controllers
             }
         }
 
-        public ReviewsController(IUserAttractionService service)
+        public ReviewsController(IUserAttractionService service, ILogger<ReviewsController> logger)
         {
             _service = service;
+            _logger = logger;
         }
     }
 }

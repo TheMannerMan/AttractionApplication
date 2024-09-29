@@ -13,13 +13,8 @@ namespace AttractionApplication.Controllers
     [Route("api/[controller]/[action]")]
     public class AdminController : ControllerBase
     {
-        // Future implementation:
-        // loginUserSessionDto _usr = null;
-
         IUserAttractionService _userAttractionService = null;
-        // Future implementation:
-        // ILoginService _loginService = null;
-        // ILogger<AdminController> _logger;
+        ILogger<AdminController> _logger;
 
         [HttpGet()]
         [ActionName("Seed")]
@@ -57,20 +52,11 @@ namespace AttractionApplication.Controllers
             }
         }
 
-        public AdminController(IUserAttractionService service)
+        public AdminController(IUserAttractionService service, ILogger<AdminController> logger)
         {
             _userAttractionService = service;
+            _logger = logger;
 
         }
-
-        /* // FUTURE IMPLEMENTATION
-                public AdminController(IFriendsService friendService, ILoginService loginService, ILogger<AdminController> logger)
-                {
-                    _friendService = friendService;
-                    _loginService = loginService;
-
-                    _logger = logger;
-                }
-        */
     }
 }

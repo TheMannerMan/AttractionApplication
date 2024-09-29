@@ -14,7 +14,8 @@ namespace AttractionApplication.Controllers
     public class LocationsController : ControllerBase
     {
         //private ILogger<csAttractionController> _logger = null;
-        private IUserAttractionService _uService = null;
+        private IUserAttractionService _service = null;
+        ILogger<LocationsController> _logger = null;
 
 
         //GET: api/csAdmin/Attractions
@@ -33,7 +34,7 @@ namespace AttractionApplication.Controllers
                 int _pageNr = int.Parse(pageNr);
                 int _pageSize = int.Parse(pageSize);
 
-                var _users = await _uService.ReadLocationsAsync(_seeded, _flat, filter?.Trim()?.ToLower(), _pageNr, _pageSize);
+                var _users = await _service.ReadLocationsAsync(_seeded, _flat, filter?.Trim()?.ToLower(), _pageNr, _pageSize);
 
                 return Ok(_users);
             }
@@ -44,9 +45,10 @@ namespace AttractionApplication.Controllers
 
         }
 
-        public LocationsController(IUserAttractionService service)
+        public LocationsController(IUserAttractionService service, ILogger<LocationsController> logger)
         {
-            _uService = service;
+            _service = service;
+            _logger = logger;
         }
     }
 }

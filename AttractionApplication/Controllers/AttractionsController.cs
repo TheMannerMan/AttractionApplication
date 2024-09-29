@@ -16,6 +16,7 @@ namespace AttractionApplication.Controllers
     {
         //loginUserSessionDto _usr = null;
         IUserAttractionService _service = null;
+        ILogger<AttractionsController> _logger = null;
 
         [HttpGet()]
         [ActionName("Read")]
@@ -92,7 +93,7 @@ namespace AttractionApplication.Controllers
                 {
                     return BadRequest($"Item with {id} does not exist");
                 }
-
+                _logger.LogInformation($"Item {_id} deleted");
                 return Ok(_resp);
             }
             catch (Exception ex)
@@ -141,7 +142,7 @@ namespace AttractionApplication.Controllers
                     throw new Exception("Id mismatch");
 
                 var _item = await _service.UpdateAttractionAsync(item);
-
+                _logger.LogInformation($"Item {_id} updated");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -159,8 +160,8 @@ namespace AttractionApplication.Controllers
             try
             {
                 var _item = await _service.CreateAttractionAsync(item);
-               
 
+                _logger.LogInformation($"item {_item.AttractionId} created");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -169,9 +170,10 @@ namespace AttractionApplication.Controllers
             }
         }
 
-        public AttractionsController(IUserAttractionService service)
+        public AttractionsController(IUserAttractionService service, ILogger<AttractionsController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
     }
