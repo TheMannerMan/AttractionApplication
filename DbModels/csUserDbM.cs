@@ -9,9 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 //using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Models.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbModels
 {
+    [Index(nameof(UserName))]
     public class csUserDbM : csUser, ISeed<csUserDbM>
     {
         [Key]

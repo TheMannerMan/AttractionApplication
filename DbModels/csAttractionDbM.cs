@@ -14,6 +14,9 @@ using Models.DTO;
 
 namespace DbModels
 {
+    [Index(nameof(AttractionName))]
+    [Index(nameof(Category))]
+    [Index(nameof(Description))]
     public class csAttractionDbM : csAttraction, ISeed<csAttractionDbM>
     {
         [Key]
@@ -53,7 +56,7 @@ namespace DbModels
         #endregion
 
         public csAttractionDbM()
-        {          
+        {
         }
 
         public csAttractionDbM(csAttractionCUdto org)

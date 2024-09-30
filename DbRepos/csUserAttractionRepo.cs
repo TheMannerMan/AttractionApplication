@@ -447,8 +447,7 @@ public class csUserAttractionRepo : IUserAttractionRepo
             {
                 _query = db.Attractions.AsNoTracking()
                     .Include(i => i.LocationDbM)
-                    .Include(i => i.ReviewsDbM)
-                    .ThenInclude(r => r.UserDbM);
+                    .Include(i => i.ReviewsDbM);
             }
 
             _query = _query.Where(i => i.Seeded == seeded);
@@ -512,7 +511,6 @@ public class csUserAttractionRepo : IUserAttractionRepo
 
             if (flat)
                 _query = db.Attractions.AsNoTracking()
-                        .Include(a => a.ReviewsDbM)
                         .Where(i => i.AttractionId == id);
 
             else
@@ -642,9 +640,7 @@ public class csUserAttractionRepo : IUserAttractionRepo
             else
             {
                 _query = db.Locations.AsNoTracking()
-                    .Include(l => l.AttractionsDbM)
-                    .ThenInclude(a => a.ReviewsDbM)
-                    .ThenInclude(r => r.UserDbM);
+                    .Include(l => l.AttractionsDbM);
             }
 
             var _ret = new csRespPageDTO<ILocation>()

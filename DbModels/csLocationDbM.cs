@@ -6,13 +6,15 @@ using Models;
 using Seido.Utilities.SeedGenerator;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-//using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace DbModels
 {
     [Index(nameof(City),nameof(Country),nameof(StreetAddress), IsUnique = true)]
+    [Index(nameof(City))]
+    [Index(nameof(Country))]
+    [Index(nameof(City), nameof(Country))]
     public class csLocationDbM : csLocation, ISeed<csLocationDbM>, IEquatable<csLocationDbM>
     {
         [Key]
