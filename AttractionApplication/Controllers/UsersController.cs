@@ -15,6 +15,7 @@ namespace AttractionApplication.Controllers
     {
         //private ILogger<csAttractionController> _logger = null;
         private IUserAttractionService _service = null;
+        ILogger<UsersController> _logger = null;
 
 
         //GET: api/csAdmin/Attractions
@@ -25,7 +26,7 @@ namespace AttractionApplication.Controllers
         public async Task<IActionResult> Read(string seeded = "true", string flat = "true",
             string filter = null, string pageNr = "0", string pageSize = "10")
         {
-            //_logger.LogInformation("Endpoint Attractions executed");
+
             try
             {
                 bool _seeded = bool.Parse(seeded);
@@ -68,7 +69,7 @@ namespace AttractionApplication.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         [HttpGet()]
         [ActionName("ReadItemDto")]
         [ProducesResponseType(200, Type = typeof(csUserCUdto))]
@@ -111,7 +112,7 @@ namespace AttractionApplication.Controllers
                 {
                     return BadRequest($"Item with {id} does not exist");
                 }
-
+                _logger.LogInformation($"item {_id} deleted");
                 return Ok(_resp);
             }
             catch (Exception ex)
@@ -134,7 +135,7 @@ namespace AttractionApplication.Controllers
                     throw new Exception("Id mismatch");
 
                 var _item = await _service.UpdateUserAsync(item);
-
+                _logger.LogInformation($"item {_id} updated");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -142,7 +143,7 @@ namespace AttractionApplication.Controllers
                 return BadRequest($"Could not update. Error {ex.Message}");
             }
         }
-        
+
         [HttpPost()]
         [ActionName("CreateItem")]
         [ProducesResponseType(200, Type = typeof(IUser))]
@@ -152,8 +153,8 @@ namespace AttractionApplication.Controllers
             try
             {
                 var _item = await _service.CreateUserAsync(item);
-               
 
+                _logger.LogInformation($"item {_item.UserId} created");
                 return Ok(_item);
             }
             catch (Exception ex)
@@ -162,9 +163,10 @@ namespace AttractionApplication.Controllers
             }
         }
 
-        public UsersController(IUserAttractionService service)
+        public UsersController(IUserAttractionService service, ILogger<UsersController> logger)
         {
             _service = service;
+            _logger = logger;
         }
     }
 }
