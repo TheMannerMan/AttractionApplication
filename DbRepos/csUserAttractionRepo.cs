@@ -73,6 +73,40 @@ public class csUserAttractionRepo : IUserAttractionRepo
             // Creating and adding Locations and Reviews for each Attraction.
             foreach (var attraction in attractions)
             {
+
+/*
+                var newLocation = new csLocationDbM().Seed(_seeder);
+                bool isUnique = true;
+
+                foreach (var location in locations)
+                {
+
+//          Console.WriteLine($"Comparing {newLocation.City}, {newLocation.Country}, {newLocation.StreetAddress} with {location.City}, {location.Country}, {location.StreetAddress}");
+                    if (newLocation.Equals(location))
+                    {
+                        attraction.LocationDbM = location;
+                        isUnique = false;
+                    }
+                }
+                foreach (var location in db.Locations)
+                {
+                    if (newLocation.Equals(location))
+                    {
+                        attraction.LocationDbM = location;
+                        isUnique = false;
+                    }
+                }
+
+                if (isUnique)
+                {
+                    locations.Add(newLocation);
+                    attraction.LocationDbM = newLocation;
+                } */
+
+
+
+
+                
                 // Create a random location.
                 var newLocation = new csLocationDbM().Seed(_seeder);
 
@@ -91,6 +125,8 @@ public class csUserAttractionRepo : IUserAttractionRepo
                 {
                     attraction.LocationDbM = existingLocation;
                 }
+
+                
 
                 int nrOfReviews = _seeder.Next(0, 21); // Randomizes a number between 0 and 20.
                 if (nrOfReviews > 0)

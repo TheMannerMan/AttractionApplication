@@ -32,6 +32,8 @@ namespace DbModels
 
         [NotMapped]
         public override ILocation Location { get => LocationDbM; set => new NotImplementedException(); }
+        
+        [Required]
         [JsonIgnore]
         [ForeignKey("LocationId")]
         public virtual csLocationDbM LocationDbM { get; set; } = null;

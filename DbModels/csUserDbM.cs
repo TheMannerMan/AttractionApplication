@@ -19,6 +19,9 @@ namespace DbModels
         [Key]
         public override Guid UserId { get; set; } = Guid.NewGuid();
 
+        [Required]
+        public override string UserName { get; set; }
+
         [NotMapped]
         public override List<IReview> Reviews { get => ReviewsDbM?.ToList<IReview>(); set => new NotImplementedException(); }
 

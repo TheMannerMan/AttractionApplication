@@ -16,9 +16,9 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    StreetAddress = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -45,7 +45,7 @@ namespace DbContext.Migrations.SqlServerDbContext
                 {
                     AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AttractionName = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
@@ -57,7 +57,8 @@ namespace DbContext.Migrations.SqlServerDbContext
                         name: "FK_Attractions_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
-                        principalColumn: "LocationId");
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,27 +66,42 @@ namespace DbContext.Migrations.SqlServerDbContext
                 columns: table => new
                 {
                     ReviewId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserDbMUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AttractionDbMAttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttractionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Seeded = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.ReviewId);
                     table.ForeignKey(
-                        name: "FK_Reviews_Attractions_AttractionDbMAttractionId",
-                        column: x => x.AttractionDbMAttractionId,
+                        name: "FK_Reviews_Attractions_AttractionId",
+                        column: x => x.AttractionId,
                         principalTable: "Attractions",
                         principalColumn: "AttractionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Reviews_Users_UserDbMUserId",
-                        column: x => x.UserDbMUserId,
+                        name: "FK_Reviews_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attractions_AttractionName",
+                table: "Attractions",
+                column: "AttractionName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attractions_Category",
+                table: "Attractions",
+                column: "Category");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attractions_Description",
+                table: "Attractions",
+                column: "Description");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attractions_LocationId",
@@ -93,21 +109,45 @@ namespace DbContext.Migrations.SqlServerDbContext
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Locations_City",
+                table: "Locations",
+                column: "City");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locations_City_Country",
+                table: "Locations",
+                columns: new[] { "City", "Country" });
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Locations_City_Country_StreetAddress",
                 table: "Locations",
                 columns: new[] { "City", "Country", "StreetAddress" },
-                unique: true,
-                filter: "[City] IS NOT NULL AND [Country] IS NOT NULL AND [StreetAddress] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_AttractionDbMAttractionId",
-                table: "Reviews",
-                column: "AttractionDbMAttractionId");
+                name: "IX_Locations_Country",
+                table: "Locations",
+                column: "Country");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserDbMUserId",
+                name: "IX_Reviews_AttractionId",
                 table: "Reviews",
-                column: "UserDbMUserId");
+                column: "AttractionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_Comment",
+                table: "Reviews",
+                column: "Comment");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_UserId",
+                table: "Reviews",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName");
         }
 
         /// <inheritdoc />

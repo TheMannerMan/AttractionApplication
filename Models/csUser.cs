@@ -9,7 +9,7 @@ namespace Models;
 public class csUser : IUser, ISeed<csUser>
 {
     public virtual Guid UserId { get; set; } = Guid.NewGuid();
-    public string UserName { get; set; }
+    public virtual string UserName { get; set; }
 
     public virtual List<IReview> Reviews { get; set; } = null;
 
@@ -17,7 +17,7 @@ public class csUser : IUser, ISeed<csUser>
 
     public virtual csUser Seed(csSeedGenerator _seeder)
     {
-        this.UserName = _seeder.FirstName;
+        this.UserName = $"{_seeder.FirstName}{_seeder.Next(0,1000)}";
         return this;
     }
 }

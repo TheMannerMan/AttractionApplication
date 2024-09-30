@@ -20,11 +20,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region Dependency Inject Custom logger
-//builder.Services.AddSingleton<ILoggerProvider, csInMemoryLoggerProvider>();
 #endregion
 
 #region Dependency Inject
-//builder.Services.AddSingleton<IAnimalsService,csAnimalsService2>();
 builder.Services.AddScoped<IUserAttractionService,csUserAttractionService>();
 builder.Services.AddScoped<IUserAttractionRepo, csUserAttractionRepo>();
 
@@ -48,14 +46,6 @@ app.UseCors(x => x
     .SetIsOriginAllowed(origin => true) // allow any origin
     .AllowCredentials()); // allow credentials
 
-
 app.MapControllers();
-
-
-/*
-var _service = new WeatherService();
-app.MapGet("/WeeklyForecast", () =>_service.WeeklyForecast());
-app.MapGet("/BiWeeklyForecast", () =>_service.BiWeeklyForecast());
-*/
 
 app.Run();

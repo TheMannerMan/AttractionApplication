@@ -90,7 +90,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         */
 
-        modelBuilder.Entity("DbModels.csReviewDbM", b =>
+        /*modelBuilder.Entity("DbModels.csReviewDbM", b =>
                 {
                     b.HasOne("DbModels.csAttractionDbM", "AttractionDbM")
                         .WithMany("ReviewsDbM")
@@ -106,7 +106,7 @@ public class csMainDbContext : Microsoft.EntityFrameworkCore.DbContext
 
                     b.Navigation("UserDbM");
                 });
-
+*/
         /*modelBuilder.Entity("DbModels.csAttractionDbM", b =>
         {
             b.HasOne("DbModels.csLocationDbM", "LocationDbM")

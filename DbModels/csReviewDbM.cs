@@ -16,20 +16,36 @@ namespace DbModels
         [Key]
         public override Guid ReviewId { get; set; } = Guid.NewGuid();
 
+        [Required]
+        public override string Comment { get; set; }
+
+        #region User relation
         [NotMapped]
         public override IUser User { get => UserDbM; set => new NotImplementedException(); }
 
-        [NotMapped]
-        public override IAttraction Attraction { get => AttractionDbM; set => new NotImplementedException(); }
-
+        [Required]
         [JsonIgnore]
-
+        [ForeignKey("UserId")]
         public virtual csUserDbM UserDbM { get; set; } = null;
 
         [JsonIgnore]
+        public Guid? UserId { get; set; }
+
+        #endregion
+
+        #region Attraction relation
+        [NotMapped]
+        public override IAttraction Attraction { get => AttractionDbM; set => new NotImplementedException(); }
+
+        [Required]
+        [JsonIgnore]
+        [ForeignKey("AttractionId")]
         public virtual csAttractionDbM AttractionDbM { get; set; } = null;
 
-
+        [JsonIgnore]
+        public Guid? AttractionId { get; set; }
+        #endregion
+  
         public override csReviewDbM Seed(csSeedGenerator _seeder)
         {
             base.Seed(_seeder);
